@@ -1,5 +1,5 @@
 ﻿
-namespace laba06_selfmade
+namespace laba07
 {
     partial class Form1
     {
@@ -36,7 +36,14 @@ namespace laba06_selfmade
             this.ColorLabel = new System.Windows.Forms.Label();
             this.ColorComboBox = new System.Windows.Forms.ComboBox();
             this.CreatingCheckBox = new System.Windows.Forms.CheckBox();
+            this.groupButton = new System.Windows.Forms.Button();
+            this.UngroupButton = new System.Windows.Forms.Button();
             this.SizeTrackBar = new System.Windows.Forms.TrackBar();
+            this.SaveButton = new System.Windows.Forms.Button();
+            this.LoadButton = new System.Windows.Forms.Button();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SizeTrackBar)).BeginInit();
             this.SuspendLayout();
@@ -57,7 +64,7 @@ namespace laba06_selfmade
             // ShapeLabel
             // 
             this.ShapeLabel.AutoSize = true;
-            this.ShapeLabel.Location = new System.Drawing.Point(1122, 133);
+            this.ShapeLabel.Location = new System.Drawing.Point(142, 802);
             this.ShapeLabel.Name = "ShapeLabel";
             this.ShapeLabel.Size = new System.Drawing.Size(164, 32);
             this.ShapeLabel.TabIndex = 1;
@@ -70,7 +77,7 @@ namespace laba06_selfmade
             "Triangle",
             "Rectangle",
             "Circle"});
-            this.ShapeComboBox.Location = new System.Drawing.Point(1122, 199);
+            this.ShapeComboBox.Location = new System.Drawing.Point(102, 885);
             this.ShapeComboBox.Name = "ShapeComboBox";
             this.ShapeComboBox.Size = new System.Drawing.Size(242, 40);
             this.ShapeComboBox.TabIndex = 2;
@@ -78,7 +85,7 @@ namespace laba06_selfmade
             // SizeLabel
             // 
             this.SizeLabel.AutoSize = true;
-            this.SizeLabel.Location = new System.Drawing.Point(1122, 264);
+            this.SizeLabel.Location = new System.Drawing.Point(439, 806);
             this.SizeLabel.Name = "SizeLabel";
             this.SizeLabel.Size = new System.Drawing.Size(141, 32);
             this.SizeLabel.TabIndex = 3;
@@ -87,7 +94,7 @@ namespace laba06_selfmade
             // ColorLabel
             // 
             this.ColorLabel.AutoSize = true;
-            this.ColorLabel.Location = new System.Drawing.Point(1122, 424);
+            this.ColorLabel.Location = new System.Drawing.Point(717, 809);
             this.ColorLabel.Name = "ColorLabel";
             this.ColorLabel.Size = new System.Drawing.Size(154, 32);
             this.ColorLabel.TabIndex = 5;
@@ -104,7 +111,7 @@ namespace laba06_selfmade
             "Green",
             "Blue",
             "Pink"});
-            this.ColorComboBox.Location = new System.Drawing.Point(1122, 478);
+            this.ColorComboBox.Location = new System.Drawing.Point(679, 885);
             this.ColorComboBox.Name = "ColorComboBox";
             this.ColorComboBox.Size = new System.Drawing.Size(242, 40);
             this.ColorComboBox.TabIndex = 6;
@@ -113,29 +120,94 @@ namespace laba06_selfmade
             // CreatingCheckBox
             // 
             this.CreatingCheckBox.AutoSize = true;
-            this.CreatingCheckBox.Location = new System.Drawing.Point(1122, 62);
+            this.CreatingCheckBox.Location = new System.Drawing.Point(102, 989);
             this.CreatingCheckBox.Name = "CreatingCheckBox";
             this.CreatingCheckBox.Size = new System.Drawing.Size(255, 36);
             this.CreatingCheckBox.TabIndex = 7;
             this.CreatingCheckBox.Text = "Create a new shape";
             this.CreatingCheckBox.UseVisualStyleBackColor = true;
             // 
+            // groupButton
+            // 
+            this.groupButton.BackColor = System.Drawing.Color.MediumVioletRed;
+            this.groupButton.ForeColor = System.Drawing.Color.White;
+            this.groupButton.Location = new System.Drawing.Point(406, 989);
+            this.groupButton.Name = "groupButton";
+            this.groupButton.Size = new System.Drawing.Size(242, 46);
+            this.groupButton.TabIndex = 10;
+            this.groupButton.Text = "Group";
+            this.groupButton.UseVisualStyleBackColor = false;
+            this.groupButton.Click += new System.EventHandler(this.groupButton_Click);
+            // 
+            // UngroupButton
+            // 
+            this.UngroupButton.BackColor = System.Drawing.Color.MediumVioletRed;
+            this.UngroupButton.ForeColor = System.Drawing.Color.White;
+            this.UngroupButton.Location = new System.Drawing.Point(697, 989);
+            this.UngroupButton.Name = "UngroupButton";
+            this.UngroupButton.Size = new System.Drawing.Size(242, 46);
+            this.UngroupButton.TabIndex = 11;
+            this.UngroupButton.Text = "Ungroup";
+            this.UngroupButton.UseVisualStyleBackColor = false;
+            this.UngroupButton.Click += new System.EventHandler(this.UngroupButton_Click);
+            // 
             // SizeTrackBar
             // 
-            this.SizeTrackBar.Location = new System.Drawing.Point(1122, 331);
+            this.SizeTrackBar.Location = new System.Drawing.Point(394, 885);
             this.SizeTrackBar.Maximum = 300;
             this.SizeTrackBar.Name = "SizeTrackBar";
             this.SizeTrackBar.Size = new System.Drawing.Size(242, 90);
-            this.SizeTrackBar.TabIndex = 10;
+            this.SizeTrackBar.TabIndex = 12;
             this.SizeTrackBar.ValueChanged += new System.EventHandler(this.SizeTrackBar_ValueChanged);
+            // 
+            // SaveButton
+            // 
+            this.SaveButton.BackColor = System.Drawing.Color.Indigo;
+            this.SaveButton.ForeColor = System.Drawing.Color.White;
+            this.SaveButton.Location = new System.Drawing.Point(846, 1113);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(242, 46);
+            this.SaveButton.TabIndex = 13;
+            this.SaveButton.Text = "Save";
+            this.SaveButton.UseVisualStyleBackColor = false;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
+            // 
+            // LoadButton
+            // 
+            this.LoadButton.BackColor = System.Drawing.Color.Indigo;
+            this.LoadButton.ForeColor = System.Drawing.Color.White;
+            this.LoadButton.Location = new System.Drawing.Point(846, 1187);
+            this.LoadButton.Name = "LoadButton";
+            this.LoadButton.Size = new System.Drawing.Size(242, 46);
+            this.LoadButton.TabIndex = 14;
+            this.LoadButton.Text = "Load";
+            this.LoadButton.UseVisualStyleBackColor = false;
+            this.LoadButton.Click += new System.EventHandler(this.LoadButton_Click);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog1";
+            // 
+            // treeView1
+            // 
+            this.treeView1.Location = new System.Drawing.Point(1236, 33);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(899, 783);
+            this.treeView1.TabIndex = 15;
+            this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LavenderBlush;
-            this.ClientSize = new System.Drawing.Size(1631, 850);
+            this.ClientSize = new System.Drawing.Size(2236, 1448);
+            this.Controls.Add(this.treeView1);
+            this.Controls.Add(this.LoadButton);
+            this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.SizeTrackBar);
+            this.Controls.Add(this.UngroupButton);
+            this.Controls.Add(this.groupButton);
             this.Controls.Add(this.CreatingCheckBox);
             this.Controls.Add(this.ColorComboBox);
             this.Controls.Add(this.ColorLabel);
@@ -164,7 +236,14 @@ namespace laba06_selfmade
         private System.Windows.Forms.Label ColorLabel;
         private System.Windows.Forms.ComboBox ColorComboBox;
         private System.Windows.Forms.CheckBox CreatingCheckBox;
+        private System.Windows.Forms.Button groupButton;
+        private System.Windows.Forms.Button UngroupButton;
         private System.Windows.Forms.TrackBar SizeTrackBar;
+        private System.Windows.Forms.Button SaveButton;
+        private System.Windows.Forms.Button LoadButton;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.TreeView treeView1;
     }
 }
 

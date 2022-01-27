@@ -4,12 +4,14 @@ using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace laba06_selfmade.Shape
+namespace laba07.Shape
 {
-    public class Triangle: ShapeCl
+    public class Triangle : ShapeCl
     {
         Point[] CurvePoints = new Point[3];
         double k;
+
+        public Triangle() { }
 
         public Triangle(int s, Point p, Color c)
         {
@@ -18,6 +20,13 @@ namespace laba06_selfmade.Shape
             Middle = p;
             ShapeColor = c;
         }
+
+        public override bool isA(string classname)
+        {
+            return (classname == "Triangle" || base.isA(classname));
+        }
+
+
         public override void Draw(PaintEventArgs e)
         {
             k = (Math.Sqrt(Math.Pow(Size, 2) - Math.Pow(Size / 2, 2)) / 3);
@@ -58,6 +67,14 @@ namespace laba06_selfmade.Shape
             else zn3 = -1;
             if ((zn1 == zn2 && zn1 == zn3) || (zn3 == 0 || zn1 == 0 || zn2 == 0)) return true;
             else return false;
+        }
+
+        public override string SaveString()
+        {
+            string sel;
+            sel = isSelected ? "S" : "N";
+            return "T" + ";" + Middle.X.ToString() + ";" + Middle.Y.ToString() + ";" + Size + ";" +
+                shapeColor.Name + ";" + Id.ToString() + ";" + sel;
         }
     }
 }

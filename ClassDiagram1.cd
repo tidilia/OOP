@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="IShape class это абстрактный класс, который обязывает классы потомки иметь методы Load и Save.">
+    <Position X="3.406" Y="1.484" Height="0.948" Width="1.695" />
+  </Comment>
+  <Comment CommentText="ShapeCl Class это базовый класс для фигур, который определяет такие свойства как цвет, размер, точка-середина, выбранность, и такие методы как Draw, Hittest, isOutOfBounds и другие,  переопределяет методы абстрактного класса.">
+    <Position X="5.328" Y="1.714" Height="1.766" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Классы MyCircle, MyRectangle, Triangle  это классы для создания геометрических фигур(круг, квадрат, треугольник). Определяют метод Save String и переопределяют некоторые методы базовго класса. ">
+    <Position X="7.156" Y="1.724" Height="1.755" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Group Class это класс для создания группы фигур. Переопределяет практически все методы базового класса, имеет методы del_el, add_el, GetShape, GetCount. ">
+    <Position X="3.391" Y="2.578" Height="1.323" Width="1.7" />
+  </Comment>
+  <Comment CommentText="IShapeFactory абстрактный класс, обязывающий классы-потомки иметь метод CreateShape.">
+    <Position X="7.312" Y="4.115" Height="0.953" Width="1.7" />
+  </Comment>
+  <Comment CommentText="ShapeFactory класс-&quot;фабрика&quot; для фигур. ">
+    <Position X="1.865" Y="4.328" Height="0.505" Width="1.653" />
+  </Comment>
+  <Class Name="laba07.Shape.Group" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAgACAAAAAkgIAQAAAAAAAAAESAAAAxACQAACAQAA=</HashCode>
+      <FileName>Shape\Group.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="laba07.Shape.IShape" Collapsed="true">
+    <Position X="1.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shape\IShape.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="laba07.Shape.ShapeCl" Collapsed="true">
+    <Position X="1.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIACgIAQAAAAkgAAQIAAAAAAAAASABAAQAAQAACAAgA=</HashCode>
+      <FileName>Shape\ShapeCl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="laba07.Shape.MyCircle" Collapsed="true">
+    <Position X="2" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAQAAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shape\Circle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="laba07.Shape.MyRectangle" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAQAAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shape\Rectangle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="laba07.Shape.Triangle" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAQAQAAAAAAAAQAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Shape\Triangle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="laba07.Shape.ShapeFactory" Collapsed="true">
+    <Position X="3.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shape\ShapeFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="laba07.Shape.IShapeFactory" Collapsed="true">
+    <Position X="5.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shape\IShapeFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
