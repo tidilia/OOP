@@ -1,193 +1,157 @@
 #include <iostream>
+#include <typeinfo>
 using namespace std;
 
-template <typename T>
-class MyStorage {
-private:
-    int size = 0;
-    int count = 0 ;
-    T *array = new T[size];
-    int index = 0;
-    void increase_arr(){
-        size += 10;
-        T *new_arr = new T[size] ;
-        for (int i = 0; i < count; ++i){
-            new_arr[i] = array[i];
-        }
-        delete[] array;
-        array = new_arr;
-        delete[] new_arr;
-        new_arr = nullptr;
-    }
-    void reduce(){
-        /*size -= 10;
-        T *new_arr = new T[size] ;
-        for (int i = 0; i < count; ++i){
-            new_arr[i] = array[i];
-        }
-        delete[] array;
-        *array = *new_arr;
-        delete[] new_arr;
-        new_arr = nullptr;
-         */
-    }
-    void reduced_arr(int i){
-        --count;
-        T new_arr[count - i];
-        int old_ind = i+1;
-        for(int j = 0; j < count-i; ++j){
-            new_arr[j] = array[old_ind];
-            old_ind++;
-        }
-        old_ind = 0;
-        for(i; i < count; ++i){
-            array[i] = new_arr[old_ind];
-            ++old_ind;
-        }
-        //if (size - count > 30 && count != 0) this->reduce();
+
+class Base {
+protected:
+    void second_method(){
+        cout << "Base::second method\n";
     }
 public:
-    MyStorage(){}
-    MyStorage(int size){
-        this->size = size + 10;
+    virtual string classname(){
+        return "Base";
     }
-    int get_count(){ return count;}
-    void addObject(T new_el){ //добавляет новый элемент в конец хранилища
-        if(count == size) this->increase_arr();
-        array[count] = new_el;
-        ++count;
+    virtual bool isA(string classname){
+        if(classname == "Base") return true;
+        else return false;
     }
-    void setObject(int i, T new_el){ //вставляем новый элемент в любое место в массиве
-        if (!array[i]) array[i] = new_el;
-        else {
-            T new_arr[count - i];
-            int old_ind = i;
-            for(int j = 0; j < count-i; ++j){
-                new_arr[j] = array[old_ind];
-                old_ind++;
-            }
-            if(count == size) this->increase_arr();
-            array[i] = new_el;
-            ++count; old_ind = 0;
-            for(int j = i+1; j < count; ++j){
-                array[j] = new_arr[old_ind];
-                old_ind++;
-            }
-        }
+    void first_method(){
+        cout << "first_method -> ";
+        second_method();
     }
-    T getObject(int i){
-        if (i > -1 && i < count) return array[i];
+    virtual void NameOf(){ // Virtual function.
+        cout << "Base::NameOf\n";
     }
-    T getdelObject(int i){
-        if (i > -1 && i < count){
-            T ret_obj = array[i];
-            this->reduced_arr(i);
-            return ret_obj;
-        }
+    void InvokingClass(){  // Nonvirtual function.
+        cout << "Invoked by Base\n";
     }
-    T nextObj(){
-        if (index < count - 1 && index >= 0){
-            ++index;
-            return array[index];
-        };
-    }
-    T prevObj(){
-        if (index > 0 && index < count){
-            --index;
-            return array[index];
-        };
-    }
-    T curObj(){
-        return array[index];
-    }
-    void print(T el){
-        cout << el;
+    virtual ~Base(){
+        cout << "Base's destructor\n";
     }
 };
 
-class Human{
-private:
-    string name = "";
-    int age = -1;
+class Derived : public Base {
+protected:
+    void second_method(){
+        cout << "Derived::second_method\n";
+    }
 public:
-    Human(){}
-    Human(string nm, int ag){
-        name = nm;
-        age = ag;
-    }
-    Human(string nm){
-        name = nm;
-    }
-    friend ostream& operator<<(ostream& os, const Human& man){
-        if (man.age > -1){
-            os << man.name << ' ' << man.age;
-        } else {
-            os << man.name << ' ';
-        }
-        return os;
-    }
+    string classname() override;
+    bool isA(string classname) override;
+    void NameOf() override;   // Virtual function.
+    void InvokingClass();   // Nonvirtual function.
+    ~Derived() override;
 };
 
-void rand_action(int d, MyStorage<int> store){
-    switch (d){
-        case 1:
-        {
-            int random = rand() % 99 + 1;
-            store.addObject(random);
-            break;
-        }
-        case 2:
-        {
-            int index = rand() % store.get_count();
-            int random = rand() % 99 + 1;
-            store.setObject(index, random);
-            break;
-        }
-        case 3:
-        {
-            int index = rand() % store.get_count();
-            store.getdelObject(index);
-            break;
-        }
-        case 4:
-        {
-            int index = rand() % store.get_count();
-            store.print(store.getObject(index));
-            break;
-        }
-    }
+
+string Derived::classname() {
+    return "Derived";
 }
 
+bool Derived::isA(string classname) {
+    return((classname == "Derived") || Base::isA(classname));
+}
+
+void Derived::NameOf() {
+    cout << "Derived::NameOf\n";
+}
+
+void Derived::InvokingClass() {
+    cout << "Invoked by Derived\n";
+}
+
+Derived::~Derived() noexcept {
+    cout << "Derived's destructor\n";
+}
+
+class Point {
+protected:
+    int x;
+    int y;
+public:
+    Point() {
+        x = 0;
+        y = 0;
+        printf("Point()\n");
+    }
+    virtual void Draw(){
+        cout << x << " " << y;
+    }
+    ~Point(){
+        printf("x = %d, y = %d\n", x, y);
+        printf("~Point()\n");
+    }
+};
+
+class ColoredPoint: public Point{
+protected:
+    int Color;
+public:
+    void Draw() override{
+        cout << x << " " << y << " " << Color;
+    }
+};
+
+class C: public Base{};
+class D: public C{};
+class Other{ virtual void fooo(){};};
+
+
 int main() {
-    MyStorage<int> storage(30);
-    for(int i = 0; i < 30; ++i){
-        storage.addObject(i);
-    }
-    storage.setObject(0,23);
-    storage.getdelObject(0);
-    storage.print(storage.getObject(0));
-    int i = 0;
-    while(storage.get_count() != i){
-        storage.getdelObject(0);
-    }
-    cout << "\nвывод массива\n";
-    i = 0;
-    while (i != storage.get_count()) {
-        storage.print(storage.getObject(i));
-        cout << "\n";
-        ++i;
-    }
-    MyStorage<Human> people_st;
-    Human new_el("Ivan", 23);
-    people_st.addObject(new_el);
-    people_st.print(people_st.getObject(0));
+    // Declare an object of type Derived.
+    Derived aDerived;
 
-    /*MyStorage<int> store;
-    cout << "\nrandom actions\n";
-    for(int i = 0; i < 100; ++i) {
-        int random = rand() % 4 + 1;
-        rand_action(random, store);
-    }*/
+    cout<<"\nПроверки на принадлежность типам\n" << "Принадлежит ли объект aDerived классу Base?\n" << "Проверка classname() -> ";
+    if (aDerived.classname() == "Base") cout << "Да.\n";
+    else cout << "Нет.\n";
+    cout<< "Принадлежит ли объект aDerived классу Base?\n" << "Проверка isA() -> ";
+    if (aDerived.isA("Base")) cout << "Да.\n";
+    else cout << "Нет.\n";
+    cout << "Принадлежит ли объект aDerived классу Derived?\n" << "Проверка isA() -> ";
+    if (aDerived.isA("Derived")) cout << "Да.\n";
+    else cout << "Нет.\n";
 
-    return 0;
+    // Declare two pointers, one of type Derived * and the other
+    //  of type Base *, and initialize them to point to aDerived.
+    Derived *pDerived = &aDerived;
+    Base    *pBase    = &aDerived;
+
+    // Call the functions.
+    cout << "\nДемонстрация работы виртуальных и невиртуальных методов с помощью указателей разного типа\n";
+    pBase->NameOf();           // Call virtual function.
+    pBase->InvokingClass();    // Call nonvirtual function.
+    pDerived->NameOf();        // Call virtual function.
+    pDerived->InvokingClass(); // Call nonvirtual function.
+    aDerived.first_method();
+
+    cout << "\nВиртуальный деструктор для Derived\n";
+    {
+        Derived newDerived;
+    }
+
+
+
+    cout << "\nБезопасное приведение типов с помощью dynamic_cast\n";
+    D *pd = new D;
+    C *pc = dynamic_cast<C*>(pd);
+    cout << typeid(pc).name() << endl; //Type: C
+    Base *pb = dynamic_cast<Base*>(pd);
+    cout << typeid(pb).name() << "\n"; //Type: Base
+
+    //Нельзя производить преобразование вниз по иерархии если базовый класс не содержит virtual
+    C* pc2 = dynamic_cast<C*>(pb);
+    cout << typeid(pc2).name() << endl; //Type: C
+
+    //Проверка класса во время выполнения
+    Other *otherptr = new Other();
+    if(dynamic_cast<Base*>(otherptr))
+        cout << "Base\n";
+    else if(dynamic_cast<Other*>(otherptr))
+        cout << "Other\n";
+
+    ColoredPoint *p = new ColoredPoint;
+    Point *p2 = dynamic_cast<Point*>(p);
+    p2->Draw();
+
 }
